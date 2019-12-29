@@ -1,0 +1,10 @@
+#c{font-size:85%;width:110px}
+#inp{resize:none}
+.g{background-color:#eee}.i{margin:-10%;width:120%}
+.i>tbody>tr>td{padding:0;text-align:center;width:calc(100%/3)}
+body{font-family:sans-serif}
+h1{font-size:120%;margin-top:0}
+table.o,table.o>tbody>tr>td{border:1px solid #000;border-collapse:collapse}
+table.o>tbody>tr>td>b{font-size:250%}
+table.o>tbody>tr>td{font-size:80%;height:45px;text-align:center;width:45px}
+u{text-decoration-style:dotted}
