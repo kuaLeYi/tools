@@ -1,5 +1,6 @@
 #c{font-size:85%;width:110px}
 #inp{resize:none}
+#master-t{margin:0 auto}
 .g{background-color:#eee}.i{margin:-10%;width:120%}
 .i>tbody>tr>td{padding:0;text-align:center;width:calc(100%/3)}
 body{font-family:sans-serif}
