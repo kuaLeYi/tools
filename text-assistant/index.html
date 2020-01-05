@@ -20,61 +20,26 @@
 <input type='radio'name='wrapoutp'onclick='wrapoutp(!1)'checked>off</label></li>
     <li>Additional word chars:<br><input class='gdinp gdinp80p'id='addnlwch'></li>
     <li><hr class='leftsidehr'></li>
-    <li><button class='btn'onclick=navigateBttm(bttmfindreplace)>Find and replace</button></li>
-    <li><button class='btn'onclick=navigateBttm(bttmtxtcou)>Text counter</button></li>
-    <li><button class='btn'onclick=extractDlmCol()>Extract col</button> <input type='number'class='gdinp gdinp20p'id='dlmcolxtracnum'> (col delimiter: <input class='gdinp gdinp30p'id='colxtracdlmr'>)</li>
-    <li><button class='btn'onclick=navigateBttm(bttmdupe)>Remove dup. lines</button></li>
-    <li><button class='btn'onclick=removeEmpAndWspLin()>Remove blank or fully whitespace lines</button></li>
-    <li><button class='btn'onclick=navigateBttm(bttmsortxtlin)>Sort lines</button></li>
-    <li><button class='btn'onclick=removeDiacritics()>Remove diacritics</button></li>
-    <li><button class='btn'onclick=navigateBttm(bttmbadspace)>Remove bad spaces</button></li>
-    <li><button class='btn'onclick=navigateBttm(bttmordinalint)>Ordinal integers</button></li>
-    <li><button class='btn'onclick=navigateBttm(bttmstopwatch)>Stopwatch</button></li>
     <li><button class='btn'onclick=navigateBttm(bttmpresufadd)>Add prefix and/or suffix line by line</button></li>
     <li><button class='btn'onclick=navigateBttm(bttmpresufrmv)>Remove prefix and/or suffix line by line</button></li>
     <li><button class='btn'onclick=navigateBttm(bttmlettercase)>Adjust letter case</button></li>
+    <li><button class='btn'onclick=extractDlmCol()>Extract col</button> <input type='number'class='gdinp gdinp20p'id='dlmcolxtracnum'> (col delimiter: <input class='gdinp gdinp30p'id='colxtracdlmr'>)</li>
+    <li><button class='btn'onclick=navigateBttm(bttmfindreplace)>Find and replace</button></li>
     <li><button class='btn'onclick=navigateBttm(bttmmerge)>Merge two texts line by line</button></li>
+    <li><button class='btn'onclick=navigateBttm(bttmordinalint)>Ordinal integers</button></li>
+    <li><button class='btn'onclick=navigateBttm(bttmbadspace)>Remove bad spaces</button></li>
+    <li><button class='btn'onclick=removeEmpAndWspLin()>Remove blank or fully whitespace lines</button></li>
+    <li><button class='btn'onclick=removeDiacritics()>Remove diacritics</button></li>
+    <li><button class='btn'onclick=navigateBttm(bttmdupe)>Remove dup. lines</button></li>
     <li><button class='btn'onclick=navigateBttm(bttmctning)>Remove lines (not) containing</button></li>
+    <li><button class='btn'onclick=navigateBttm(bttmsortxtlin)>Sort lines</button></li>
+    <li><button class='btn'onclick=navigateBttm(bttmstopwatch)>Stopwatch</button></li>
+    <li><button class='btn'onclick=navigateBttm(bttmtxtcou)>Text counter</button></li>
   </ul></div>
   <div class='col colright'><div id='wrapper'><a></a><textarea id='outp'></textarea></div></div>
 </div>
 <div id='bttm'>
 <div id='bttmdefault'class='visible'><h1>Text Assistant</h1><p>WIP, last edited on 2020-01-01</p></div>
-<div id='bttmfindreplace'>
-<button class='btn'onclick=findReplace()>Go</button> <span id='frnum'></span> <label><input type='checkbox'id='frglobm'checked>Global matching</label> <label><input type='checkbox'id='frcass'>Case-sensitive</label>
-<div>Find this (<label><input type='checkbox'id='frenrgx'>enable regex</label>):<blockquote class='invis'id='frrgxhelp'>Replace <kbd>a</kbd> or <kbd>b</kbd> or <kbd>c</kbd> with <kbd>d</kbd>: search value <kbd>a|b|c</kbd>, new value <kbd>d</kbd><br>
-Insert <kbd>a</kbd> and <kbd>b</kbd> around c: search value <kbd>(c)</kbd>, new value <kbd>a$1b</kbd><br>
-Swap <kbd>a</kbd> and <kbd>b</kbd>: search value <kbd>(a)(b)</kbd>, new value <kbd>$2$1</kbd><br>
-Replace <kbd>a</kbd>, if followed by <kbd>b</kbd>, with <kbd>c</kbd>: search value <kbd>a(?=b)</kbd>, new value <kbd>c</kbd><br>
-More on regex in the <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions'target='_blank'>MDN Web Docs</a></blockquote></div>
-<div id='yscontainer'><textarea class='nicerarea'id='frfindys'></textarea></div>
-<div>Replace with:</div>
-<textarea class='nicerarea'id='frrplcw'></textarea></div>
-<div id='bttmdlmcolxtrac'><textarea class='nicerarea'id='dlmcolxtracres'></textarea></div>
-<div id='bttmdupe'>
-<button class='btn'onclick=undupe()>Go</button> <label><input type='checkbox'id='dupesensitive'>Case-sensitive</label> <label><input type='checkbox'id='dupermvempty'>Remove empty (even if only one)</label><br>
-<textarea class='nicerarea'id='dupedisp'></textarea></div>
-<div id='bttmsortxtlin'><button class='btn'onclick=sortTextLines(1)>Alphabetic</button>
-<button class='btn'onclick=sortTextLines(2)>Alphabetic c-s</button>
-<button class='btn'onclick=sortTextLines(3)>Natural</button>
-<button class='btn'onclick=sortTextLines(4)>Natural c-s</button><br>
-<button class='btn'onclick=sortTextLines(5)>Length</button>
-<button class='btn'onclick=shuffleTextLines()>Random</button>
-<button class='btn'onclick=reverseTextLines()>Reverse</button></div>
-<div id='bttmdiacritic'></div>
-<div id='bttmbadspace'>
-<button class='btn'onclick=spaceRemoval()>Go</button><br>
-Remove: <label><input type='radio'name='rmvspchow'value=0 checked>extra</label>
-<label><input type='radio'name='rmvspchow'value=1>all</label> spaces<br>
-<label><input type='checkbox'id='rmvspcleadtrail'checked>Trim leading/trailing whitespace from lines</label>
-<div id='bttmbadspaceend'></div>
-</div>
-<div id='bttmordinalint'><button class='btn'onclick=ordinalInt()>Go</button><br>
-Bounded by <input type='number'class='gdinp'id='ordinallow'> and <input type='number'class='gdinp'id='ordinalhigh'></div>
-<div id='bttmstopwatch'><button class='btn'id='startwc'onclick=strtwatch()>Start</button>
-<button class='btn'id='splitwc'onclick=spltwatch() disabled>Split</button>
-<button class='btn'id='resetwc'onclick=rstwatch()>Reset</button>
-<div id='timewatch'></div></div>
 <div id='bttmpresufadd'>
 <button class='btn'onclick=preSufAdd()>Go</button><br>
 Prefix each line with:<br><input class='gdinp'id='presufa'><br>
@@ -91,6 +56,17 @@ Remove this suffix from each line:<br><input class='gdinp'id='presufd'>
 <button class='btn'onclick=letterCase(3)>Random</button><br>
 <button class='btn'onclick=letterCase(4)>Big first letter for each word</button>
 </div>
+<div id='bttmdlmcolxtrac'><textarea class='nicerarea'id='dlmcolxtracres'></textarea></div>
+<div id='bttmfindreplace'>
+<button class='btn'onclick=findReplace()>Go</button> <span id='frnum'></span> <label><input type='checkbox'id='frglobm'checked>Global matching</label> <label><input type='checkbox'id='frcass'>Case-sensitive</label>
+<div>Find this (<label><input type='checkbox'id='frenrgx'>enable regex</label>):<blockquote class='invis'id='frrgxhelp'>Replace <kbd>a</kbd> or <kbd>b</kbd> or <kbd>c</kbd> with <kbd>d</kbd>: search value <kbd>a|b|c</kbd>, new value <kbd>d</kbd><br>
+Insert <kbd>a</kbd> and <kbd>b</kbd> around c: search value <kbd>(c)</kbd>, new value <kbd>a$1b</kbd><br>
+Swap <kbd>a</kbd> and <kbd>b</kbd>: search value <kbd>(a)(b)</kbd>, new value <kbd>$2$1</kbd><br>
+Replace <kbd>a</kbd>, if followed by <kbd>b</kbd>, with <kbd>c</kbd>: search value <kbd>a(?=b)</kbd>, new value <kbd>c</kbd><br>
+More on regex in the <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions'target='_blank'>MDN Web Docs</a></blockquote></div>
+<div id='yscontainer'><textarea class='nicerarea'id='frfindys'></textarea></div>
+<div>Replace with:</div>
+<textarea class='nicerarea'id='frrplcw'></textarea></div>
 <div id='bttmmerge'>
 <table class='centext'><tr>
 <td class='wid10ptbl'>Prefix<br><input class='gdinp wid100ptd'id='mergepre'></td>
@@ -113,6 +89,19 @@ Remove this suffix from each line:<br><input class='gdinp'id='presufd'>
 <div>Fill voids with: <input class='gdinp wid10ptbl'id='mergev'></div>
 <div>Separate the resulting lines with: <input class='gdinp wid10ptbl'id='mergejoinw'> (use \x for \n)</div>
 </div>
+<div id='bttmordinalint'><button class='btn'onclick=ordinalInt()>Go</button><br>
+Bounded by <input type='number'class='gdinp'id='ordinallow'> and <input type='number'class='gdinp'id='ordinalhigh'></div>
+<div id='bttmbadspace'>
+<button class='btn'onclick=spaceRemoval()>Go</button><br>
+Remove: <label><input type='radio'name='rmvspchow'value=0 checked>extra</label>
+<label><input type='radio'name='rmvspchow'value=1>all</label> spaces<br>
+<label><input type='checkbox'id='rmvspcleadtrail'checked>Trim leading/trailing whitespace from lines</label>
+<div id='bttmbadspaceend'></div>
+</div>
+<div id='bttmdiacritic'></div>
+<div id='bttmdupe'>
+<button class='btn'onclick=undupe()>Go</button> <label><input type='checkbox'id='dupesensitive'>Case-sensitive</label> <label><input type='checkbox'id='dupermvempty'>Remove empty (even if only one)</label><br>
+<textarea class='nicerarea'id='dupedisp'></textarea></div>
 <div id='bttmctning'><div><button class='btn'onclick=ctningDo(0)>Remove lines containing:</button> <button class='btn'onclick=ctningDo(1)>Remove lines not containing:</button> <label><input type='checkbox'id='ctningcass'>Case-sensitive</label></div><div><label><input type='checkbox'id='ctningenrgx'>Enable regex</label></div>
 <div id='ctningcontainer'>
 <textarea class='nicerarea'id='ctningsearch'></textarea><br>Search items must be delimited by a newline.<br>How to combine the search items: <label><input type='radio'name='ctningsearchow'value=0 checked>AND</label><label><input type='radio'name='ctningsearchow'value=1>OR</label>
@@ -120,6 +109,17 @@ Remove this suffix from each line:<br><input class='gdinp'id='presufd'>
 <blockquote class='invis'id='ctningrgxhelp'><kbd>a|b|c</kbd> for OR, <kbd>(?=.*a)(?=.*b)(?=.*c).*</kbd> for AND; more on regex <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions'target='_blank'>here</a></blockquote>
 <span id='ctningdonenum'></span>Displaying removed lines:<br>
 <textarea class='nicerarea'id='ctningdisp'></textarea></div>
+<div id='bttmsortxtlin'><button class='btn'onclick=sortTextLines(1)>Alphabetic</button>
+<button class='btn'onclick=sortTextLines(2)>Alphabetic c-s</button>
+<button class='btn'onclick=sortTextLines(3)>Natural</button>
+<button class='btn'onclick=sortTextLines(4)>Natural c-s</button><br>
+<button class='btn'onclick=sortTextLines(5)>Length</button>
+<button class='btn'onclick=shuffleTextLines()>Random</button>
+<button class='btn'onclick=reverseTextLines()>Reverse</button></div>
+<div id='bttmstopwatch'><button class='btn'id='startwc'onclick=strtwatch()>Start</button>
+<button class='btn'id='splitwc'onclick=spltwatch() disabled>Split</button>
+<button class='btn'id='resetwc'onclick=rstwatch()>Reset</button>
+<div id='timewatch'></div></div>
 <div id='bttmtxtcou'><table class='tblocky'>
 <tr><th class='blancll'></th><th>Characters</th><th>Words</th><th>Lines</th><th>Column</th><td rowspan=2>Don't count <label><input type='checkbox'id='txtcounospc'>spaces</label><br>
 <label><input type='checkbox'id='txtcounotag'>text between <kbd>&lt;</kbd> and <kbd>&gt;</kbd></label><br>
@@ -134,16 +134,16 @@ Remove this suffix from each line:<br><input class='gdinp'id='presufd'>
 <div class='colcou3'><ul id='txtcoufreq'></ul></div></div>
 </div>
 <script src='systemscrp.js'></script>
-<script src='frscrp.js'></script>
-<script src='txtcouscrp.js'></script>
-<script src='dlmcolxtracscrp.js'></script>
-<script src='dupescrp.js'></script>
-<script src='sortxtlinscrp.js'></script>
-<script src='undiacriticscrp.js'></script>
-<script src='rmvspcscrp.js'></script>
-<script src='stopwatchscrp.js'></script>
-<script src='ordintscrp.js'></script>
 <script src='presufaddrmvscrp.js'></script>
 <script src='lettercasescrp.js'></script>
+<script src='dlmcolxtracscrp.js'></script>
+<script src='frscrp.js'></script>
 <script src='mergescrp.js'></script>
-<script src='ctningscrp.js'></script></body></html>
+<script src='ordintscrp.js'></script>
+<script src='rmvspcempwspscrp.js'></script>
+<script src='undiacriticscrp.js'></script>
+<script src='dupescrp.js'></script>
+<script src='ctningscrp.js'></script>
+<script src='sortxtlinscrp.js'></script>
+<script src='stopwatchscrp.js'></script>
+<script src='txtcouscrp.js'></script></body></html>

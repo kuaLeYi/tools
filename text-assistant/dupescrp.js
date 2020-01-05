@@ -11,5 +11,3 @@ function undupe() {
   fcs();
   dupedisp.value = result.length+' line(s) removed.\n'+result.join`\n`;
 }
-
-function removeEmpAndWspLin() { outp.value = outplines().filter(e => !e.match(/^(\s+|)$/)).join`\n`; }

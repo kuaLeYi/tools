@@ -11,3 +11,5 @@ function spaceRemoval() {
   fcs();
   bttmbadspaceend.innerHTML = `${len-o.length} space(s) removed`;
 }
+
+function removeEmpAndWspLin() { outp.value = outplines().filter(e => !e.match(/^(\s+|)$/)).join`\n`; }
