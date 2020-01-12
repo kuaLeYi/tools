@@ -2,4 +2,4 @@
 
 WIP. The current version may have functional and stylistic problems.
 
-[This tool](https://kualeyi.github.io/tools/text-assistant) is best used as a desktop page.
+[This tool](https://kuaLeYi.github.io/tools/text-assistant) is best used as a desktop page.
