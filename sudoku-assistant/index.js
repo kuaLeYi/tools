@@ -1,20 +1,20 @@
-var board, transform = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]);;
+var board, transform = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]);
 function example(){
   inp.value = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => transform.indexOf(e)+1);
   main(inp.value);
   b.click();
 }
 function zeroesInsrtd(x){
-var res = [0,0,0,0,0,0,0,0,0];
-for (var i = 0; i < 9; ++i) if (~x.indexOf(i+1)) res[i] = i+1;
-return res;
+  var res = [0,0,0,0,0,0,0,0,0];
+  for (var i = 0; i < 9; ++i) if (~x.indexOf(i+1)) res[i] = i+1;
+  return res;
 }
 function presentNotes(x){
-return`<table class='i'>${zeroesInsrtd(x).join``.match(/.{1,3}/g).map(e=>`<tr>${e.split``.map(f=>`<td>${f!=0?`<b>${f}</b>`:'·'}</td>`).join``}</tr>`).join``}</table>`
+  return`<table class='i'>${zeroesInsrtd(x).join``.match(/.{1,3}/g).map(e=>`<tr>${e.split``.map(f=>`<td>${f!=0?`<b>${f}</b>`:'·'}</td>`).join``}</tr>`).join``}</table>`
 }
 function process(x){return x.split(/[ \n]/g).map(e=>e.split``.map(f=>+f));}
 function display(x){
-a.innerHTML=`<table class='o'>${x.map((e,i)=>`<tr>${e.map((f,j)=>`<td${(~~(i/3)+~~(j/3))%2?" class='g'":''}>${f!=0?(f.length>1?presentNotes(f):`<b>${f}</b>`):''}</td>`).join``}</tr>`).join``}</table>`;
+  a.innerHTML=`<table class='o'>${x.map((e,i)=>`<tr>${e.map((f,j)=>`<td${(~~(i/3)+~~(j/3))%2?" class='g'":''}>${f!=0?(f.length>1?presentNotes(f):`<b>${f}</b>`):''}</td>`).join``}</tr>`).join``}</table>`;
 }
 function initNotes(w, x, y){
   var X = ~~(x/3)*3,
