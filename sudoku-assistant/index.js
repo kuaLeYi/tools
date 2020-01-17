@@ -1,6 +1,7 @@
 var board;
 function example(){
-  inp.value = '020017905\n000602310\n000009007\n000020053\n003060700\n190050000\n800300000\n039108000\n504270030';
+  var x = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]);
+  inp.value = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => x.indexOf(e)+1);
   main(inp.value);
   b.click();
 }
