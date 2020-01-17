@@ -30,10 +30,10 @@ function initNotes(w, x, y){
   return [1,2,3,4,5,6,7,8,9].filter(e => nays.indexOf(e) < 0);
 }
 function main(input){
-if (!input || input.replace(/(\d{9}[ \n]){8}\d{9}/,'').length) {
-  b.disabled = true;
-  return;
-} else b.disabled = false;
+  if (!input || input.replace(/(\d{9}[ \n]){8}\d{9}/,'').length) {
+    b.disabled = true;
+    return;
+  } else b.disabled = false;
   board = process(input);
   board = board.map(
     (e,i) => e.map(
