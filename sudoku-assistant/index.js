@@ -2,14 +2,17 @@ var board,
   substit = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]),
   rotat = arr => arr.map((e, i, a) => a.map(e => e[e.length-i-1]).join``),
   rotMode = Math.random(),
-  mirrMode = Math.random();
+  mirrMode = Math.random(),
+  transform = arr => {
+    if (rotMode < .75) arr = rotat(arr);
+    if (rotMode < .5) arr = rotat(arr);
+    if (rotMode < .25) arr = rotat(arr);
+    if (mirrMode < .5) arr = arr.map(e => e.split``.reverse().join``);
+  };
 function example(){
   inp.value = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => substit.indexOf(e)+1);
   var l = inp.value.split`\n`;
-  if (rotMode < .75) l = rotat(l);
-  if (rotMode < .5) l = rotat(l);
-  if (rotMode < .25) l = rotat(l);
-  if (mirrMode < .5) l = l.map(e => e.split``.reverse().join``);
+  transform(l);
   main(l.join`\n`);
   b.click();
 }
