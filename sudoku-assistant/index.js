@@ -1,14 +1,15 @@
-var board, transform = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]);
+var board,
+  substit = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]),
+  rotat = arr => arr.map((e, i, a) => a.map(e => e[e.length-i-1]).join``),
+  rotMode = Math.random(),
+  mirrMode = Math.random();
 function example(){
-  inp.value = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => transform.indexOf(e)+1);
-  var l = inp.value.split`\n`,
-    f = arr => arr.map((e, i, a) => a.map(e => e[e.length-i-1]).join``),
-    r = Math.random(),
-    r2 = Math.random();
-  if (r < .75) l = f(l);
-  if (r < .5) l = f(l);
-  if (r < .25) l = f(l);
-  if (r2 < .5) l = l.map(e=>e.split``.reverse().join``);
+  inp.value = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => substit.indexOf(e)+1);
+  var l = inp.value.split`\n`;
+  if (rotMode < .75) l = rotat(l);
+  if (rotMode < .5) l = rotat(l);
+  if (rotMode < .25) l = rotat(l);
+  if (mirrMode < .5) l = l.map(e => e.split``.reverse().join``);
   main(l.join`\n`);
   b.click();
 }
