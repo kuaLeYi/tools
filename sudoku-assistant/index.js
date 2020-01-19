@@ -8,12 +8,11 @@ var board,
     if (rotMode < .5) arr = rotat(arr);
     if (rotMode < .25) arr = rotat(arr);
     if (mirrMode < .5) arr = arr.map(e => e.split``.reverse().join``);
-  };
+  },
+  l = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => substit.indexOf(e)+1).split`\n`;
+transform(l);
 function example(){
-  inp.value = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => substit.indexOf(e)+1);
-  var l = inp.value.split`\n`;
-  transform(l);
-  main(l.join`\n`);
+  main(inp.value = l.join`\n`);
   b.click();
 }
 function zeroesInsrtd(x){
