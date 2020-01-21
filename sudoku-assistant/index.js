@@ -1,7 +1,7 @@
 var board,
   substit = '123456789'.split``.map(e => [e, Math.random()]).sort((a, b) => a[1]-b[1]).map(e => e[0]),
   rotat = arr => arr.map((e, i, a) => a.map(e => e[e.length-i-1]).join``),
-  transform = x => {
+  transform = arr => {
     var rotMode = Math.random(), mirrMode = Math.random();
     if (rotMode < .75) arr = rotat(arr);
     if (rotMode < .5) arr = rotat(arr);
