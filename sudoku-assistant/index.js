@@ -9,8 +9,7 @@ var board,
     if (mirrMode < .5) arr = arr.map(e => e.split``.reverse().join``);
     return arr;
   },
-  l = '000700000\n100000000\n000430200\n000000006\n000509000\n000000418\n000081000\n002000050\n040000300'.replace(/[1-9]/g, e => substit.indexOf(e)+1).split`\n`;
-l = transform(l);
+  l = transform('000700000 100000000 000430200 000000006 000509000 000000418 000081000 002000050 040000300'.replace(/[1-9]/g, e => substit.indexOf(e)+1).split` `);
 function example(){
   main(inp.value = l.join`\n`);
   b.click();
