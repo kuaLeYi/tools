@@ -8,7 +8,7 @@ firebase.initializeApp({
 var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   rspAcc = (x, wic) => { $('#rsp-'+wic).html(x); },
   lgnBool = false,
-  bod = $('body'),
+  bod = $('body'), hjs = '\' href=\'javascript:\'>',
   htmlRp = x => x.replace(/&/g, '&amp;').replace(/</g, '&lt;'),
   iShowingOld = '', iShowing = '',
   userId, poast = [], weeki = [], darkM,
@@ -18,10 +18,10 @@ var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   partPri = 'vl l m h vh'.split` `,
   getPrioriStr = o => fullPri[partPri.indexOf(o.priority)],
   getTagStr = o => htmlRp(o.tags).split` `.map(e =>
-      `<a class='tg' href='javascript:'>${e.replace(/_/g,' ')}</a>`
+      `<a class='tg${hjs}${e.replace(/_/g,' ')}</a>`
     ).join`, `,
   getLkStr = o => o.links.split` `.map(e =>
-      `<a class='lkinpvu' href='javascript:'>${e}</a>`
+      `<a class='lkinpvu${hjs}${e}</a>`
     ).join`, `,
   parseDescription = x => x.split`\n\n`.map(e => `<p>${e}</p>`).join``
     .replace(/\*\*(.+?)\*\*/g, (a, b) => `<b>${b}</b>`)
@@ -106,9 +106,9 @@ other than small letters (a–z), digits (0–9) or hyphens (-).`);
   }
 };
 $('#main-pvu').html(`Viewing post at address <span id='pvuadr'></span> |
-<a class='delet' href='javascript:'>Instant delete</a> | \
-<a class='edmd' id='pvuenem' href='javascript:'>Enter edit mode</a>\
-<a class='edmd hid' id='pvusaexem' href='javascript:'>\
+<a class='delet${hjs}Instant delete</a> | \
+<a class='edmd' id='pvuenem${hjs}Enter edit mode</a>\
+<a class='edmd hid' id='pvusaexem${hjs}\
 Save and exit edit mode</a><div><b id='savvup-wrn'></b></div><hr>
 <div class='pvucntnt' id='pvucntnta'><p><b>Priority:</b> \
 <span id='pvupri'></span></p><hr>
@@ -193,9 +193,8 @@ function lisAppend(x, y, z) {
 function processPost(p, a) {
   return `<div><hr>\
 Priority: ${getPrioriStr(p)}<br>\
-Title: <a class='ti' id='${a}' href='javascript:'>${
-  p.title ? p.title : 'NONE'
-}</a><br>\
+Title: <a class='ti' id='${a}${hjs}${
+  p.title ? p.title : 'NONE' }</a><br>\
 Tags: <span class='gat'>${getTagStr(p)}</span></div>`;
 }
 scbtn.onclick = () => {
@@ -368,9 +367,9 @@ wscbtn.onclick = () => {
   r = new RegExp(wscvFull.join`|`);
   for (var e in weeki) if (r.test(e)) results.push(e);
   $('#wscresbod').html(
-    results.map(e => `<div><a class='tg' href='javascript:'>${
-      e.replace(/_/g, ' ')
-    }</a></div>`));
+    results.map(e => `<div><a class='tg${hjs}${
+      e.replace(/_/g, ' ') }</a></div>`)
+  );
   wikCnxtTags();
   flipTo('wscres');
 };
