@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='x-ua-compatible' content='ie=edge;chrome=1'>
+<meta name='viewport' content='width=device-width,initial-scale=1,user-scalable=no'>
+<title>Planner</title>
+<link rel='icon' href='https://avatars0.githubusercontent.com/u/23028142' type='image/png'>
+<link rel='stylesheet' href='index.css'>
+</head>
+<body>
+<div id='snav'>
+  <a id='ins'>Instruction</a>
+  <a id='com'>Command</a>
+  <a id='adv'>Advisory</a>
+  <a id='ans'>Answer</a>
+  <a id='his'>Historical</a>
+  <a id='pre'>Predictive</a>
+  <br>
+  <a id='hom'>Home</a>
+  <a id='rme'>README</a>
+  <br>
+  <input name='sc'><br>
+  <label for='sc'>
+    <button id='scbtn' disabled>Search/filter posts</button>
+  </label><br>
+  <br>
+  <input name='wsc'><br>
+  <label for='wsc'>
+    <button id='wscbtn' disabled>Search/edit tag wiki</button>
+  </label><br>
+  <br>
+  <a id='acc' class='nav-cur'>Account</a>
+</div>
+<div id='main'>
+<div id='main-ins'>
+<a class='nup' href='javascript:'>New post</a>
+<div class='main-sth-lis' id='main-ins-lis'></div>
+</div>
+<div id='main-com'>
+<a class='nup' href='javascript:'>New post</a>
+<div class='main-sth-lis' id='main-com-lis'></div>
+</div>
+<div id='main-adv'>
+<a class='nup' href='javascript:'>New post</a>
+<div class='main-sth-lis' id='main-adv-lis'></div>
+</div>
+<div id='main-ans'>
+<a class='nup' href='javascript:'>New post</a>
+<div class='main-sth-lis' id='main-ans-lis'></div>
+</div>
+<div id='main-his'>
+<a class='nup' href='javascript:'>New post</a>
+<div class='main-sth-lis' id='main-his-lis'></div>
+</div>
+<div id='main-pre'>
+<a class='nup' href='javascript:'>New post</a>
+<div class='main-sth-lis' id='main-pre-lis'></div>
+</div>
+<div id='main-pnu'>
+New post, type <span id='savnuptyp'></span><br>
+<a id='savnup' href='javascript:'>Save</a> |
+<a class='cnl' href='javascript:'>Instant cancel</a>
+<div><b class='wrn' id='savnup-warn'></b></div>
+<hr><div id='priselti-blobby'>
+<label for='prisel'>Priority: </label><select id='prisel' name='prisel'>
+  <option value='vl'>Very low</option>
+  <option value='l'>Low</option>
+  <option value='m'>Medium</option>
+  <option value='h'>High</option>
+  <option value='vh'>Very high</option>
+</select>
+<hr>
+<label for='ti'>Title: </label><input id='ti' name='ti'></div>
+<hr>
+<label for='adr'>Address: </label><input id='adr' name='adr'><br>
+<small>This will be used when other posts link to this one.
+To prevent conflicts, you can't change it once it's set.</small>
+<div id='destglnk-blobby'><hr>
+<label for='des'>Description:</label><br>
+<textarea id='des' name='des' rows=5></textarea><br>
+<small>Simple markup is available.
+<a class='des-cmnt-blk des-cmnt-sh' href='javascript:'>
+Show help</a>
+<span class='des-cmnt-blk hid'>
+<a class='des-cmnt-sh' href='javascript:'>Hide help</a>
+<ul>
+<li>Use a single line break for a single line break,
+and a double line break for paragraphs.</li>
+<li>Enclose text <code>**in double asterisks**</code> for bold.</li>
+<li>Type <code>//like this//</code> for italics.</li>
+<li>Type <code>^^like this^^</code> for superscript.</li>
+<li>Type <code>,,like this,,</code> for subscript.</li>
+</ul>
+</span></small>
+<hr>
+<label for='tg'>Tags:</label><br>
+<textarea id='tg' name='tg'></textarea><br>
+<small>Tags are delimited by spaces.
+Any spaces a tag would've had must each be replaced
+by an underscore.</small>
+<hr>
+<label for='lnk'>Links:</label><br>
+<textarea id='lnk' name='lnk'></textarea><br>
+<small>Addresses are delimited by spaces.
+Any line break you type will be saved as a space.</small></div>
+</div>
+<div id='main-pvu'>
+</div>
+<div id='main-hom'>
+<p>Welcome to DSLY's planner, a free-of-charge app that
+uses no log files, cookies, web beacons or advertisements.</p>
+<p>Upon login, you can create priority-settable, taggable, linkable
+pieces of information of any one of the six types listed on the sidebar;
+edit them; and delete them when you no longer need them.
+This is a low-fuss app, so please start exploring (and working)
+whenever you wish.</p>
+<p>Please note that entries in the tag wiki can't be deleted.
+Such an operation was excluded deliberately.</p>
+<h2>Using the sidebar's search functions</h2>
+<h3>Search/filter posts</h3>
+<ul>
+<li>Nothing: Display all posts of the currently selected type</li>
+<li><code>fOo</code>: Display posts, where they exist,
+having the tag <i>fOo</i></li>
+<li><code>f00lish_idea</code>: Display posts, where they exist,
+having the tag <i>f00lish idea</i></li>
+<li><code>_f00lish_idea</code>: Display posts, where they exist,
+without the tag <i>f00lish idea</i></li>
+<li><code>SWORDfi\n</code>: Display posts, where they exist,
+having at least one tag consisting of <i>SWORDfi</i>
+followed by one or more characters</li>
+<li><code>foo _fOo SWORDfi\n</code>: Display posts, where they exist,
+having the tag <i>foo</i>; without the tag <i>fOo</i>; and
+having at least one tag consisting of <i>SWORDfi</i>
+followed by one or more characters</li>
+</ul>
+<h3>Search/edit tag wiki</h3>
+<ul>
+<li>Nothing: Display all tags</li>
+<li><code>FoO</code>: Display a search result, if it exists,
+for the tag <i>FoO</i></li>
+<li><code>FoO bAr</code>: Display search results, where they exist,
+for the tag <i>FoO</i> and the tag <i>bAr</i></li>
+<li><code>FoO bAr b\nz</code>: Display search results, where they exist,
+for the tag <i>FoO</i>, the tag <i>bAr</i> and
+any tags consisting of <i>b</i> followed by one or more characters
+followed by <i>z</i></li>
+<li><code>__BAR_FOO</code>: Go directly to the tag <i>BAR FOO</i>'s
+wiki page, creating it if the entry doesn't yet exist</li>
+</ul>
+Unlike when searching or filtering posts, negative search isn't
+possible when trying to search or edit the tag wiki.
+</div>
+<div id='main-rme'>
+<h2>Tips and NB</h2>
+<ul>
+<li>Desktop only.</li>
+<li><a href='https://www.le.ac.uk/oerresources/psychology/ergonomics/page_07.htm'>
+Here</a>'s one recommended classification of
+the six types of information you can put in this planner.</li>
+<li>Each user must define his/her priority levels and tags
+him/herself. You're advised to create wiki entries to aid recall.</li>
+<li><i>Home</i> teaches you how to make full use of
+the sidebar's search functions.</li>
+</ul>
+<h2>Official statements</h2>
+<p>I, Kua Le Yi (pseud. DSLY), license this work under the
+<a href='http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode'>
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Licence</a>.
+You may remix, tweak and build upon my work non-commercially,
+as long as you credit me and license your new creation under
+the identical terms.</p>
+<p>This is a very simple app that uses
+<a href='http://firebase.google.com/'>Firebase</a>.
+Owing to read, write and update limits,
+you may not be as productive as you expect.
+Whilst I may try to work against such problems as creator of the app,
+I take no responsibility if you meet with them after
+continuing to use my work.</p>
+</div>
+<div id='main-acc'>
+<div class='acc-sth' id='acc-enter'>
+<input id='unom' type='email' placeholder='Email address'>
+<input id='pw' type='password' placeholder='Password'><br>
+<a id='dolgn' href='javascript:'>Log in</a> |
+<a id='cracc' href='javascript:'>Create account</a>
+<div>Status/Response: <span id='rsp-e'>NIL</span></div>
+</div>
+<div class='acc-sth' id='acc-leave'>
+You're logged in with the following user email:
+<span id='acc-leave-eml'></span><br>
+<a id='dolgt' href='javascript:'>Log out</a><br>
+<a id='dmtgl' href='javascript:'>Switch to
+<span id='dmtgltarg'>dark</span> mode and save pref.</a>
+<div>Status/Response: <span id='rsp-l'>NIL</span></div>
+</div>
+</div>
+<div id='main-wikp'>
+<a id='wikpbac' href='javascript:'>Back</a>
+<span id='wikpbac-alert'></span><br>
+Tag: <span id='wikph'></span><br><small>Wiki entry</small><hr>
+Content:<br><textarea id='wikpb'></textarea><br>
+<a id='wikps' href='javascript:'>Save</a> |
+<a id='wikpr' href='javascript:'>Instant delete</a>
+<div id='wikpprob'></div>
+</div>
+<div id='main-wscres'>
+  <b id='wscreshed'>Results for your wiki search</b>
+  <div id='wscresbod'></div>
+</div>
+</div>
+<script src='https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js'></script>
+<script src='https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js'></script>
+<script src='https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js'></script>
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+<script src='index.js'></script>
+</body>
+</html>
