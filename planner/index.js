@@ -146,6 +146,7 @@ cracc.onclick = () => {
 dolgt.onclick = () => {
   auth.signOut().then(function() {
     $('.main-sth-lis').empty();
+    $('#rsp-e').html('NIL');
     $('.acc-sth').hide();
     $('#acc-enter').show();
   }).catch(err => { rspAcc(err.message, 'l'); });
@@ -172,8 +173,10 @@ auth.onAuthStateChanged(u => {
         weeki = s.wikients;
       }
       darkM = s.drkm;
-      if (darkM) bod.addClass('darkmode');
-      else bod.removeClass('darkmode');
+      if (darkM) {
+        bod.addClass('darkmode');
+        $('#dmtgltarg').html('light');
+      } else bod.removeClass('darkmode');
       $('#acc-leave-eml').html(s.email);
       $('.acc-sth').hide();
       $('#acc-leave').show();
