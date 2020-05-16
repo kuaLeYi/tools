@@ -9,6 +9,7 @@ var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   rspAcc = (x, wic) => { $('#rsp-'+wic).html(x); },
   lgnBool = false,
   bod = $('body'),
+  htmlRp = x => x.replace(/&/g, '&amp;').replace(/</g, '&lt;'),
   iShowingOld = '', iShowing = '',
   userId, poast = [], weeki = [], darkM,
   root = e => 'planner/'+userId+(e?(e>1?'/wikients':'/posts'):''),
@@ -16,8 +17,7 @@ var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   fullPri = 'Very low,Low,Medium,High,Very high'.split`,`,
   partPri = 'vl l m h vh'.split` `,
   getPrioriStr = o => fullPri[partPri.indexOf(o.priority)],
-  getTagStr = o => o.tags.replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    .split` `.map(e =>
+  getTagStr = o => htmlRp(o.tags).split` `.map(e =>
       `<a class='tg' href='javascript:'>${e.replace(/_/g,' ')}</a>`
     ).join`, `,
   getLkStr = o => o.links.split` `.map(e =>
@@ -95,8 +95,7 @@ other than small letters (a–z), digits (0–9) or hyphens (-).`);
     updt['/'+adrv] = {
       priority: prisel.value,
       title: ti.value.trim(),
-      description: des.value.trim()
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;'),
+      description: htmlRp(des.value.trim()),
       tags: clnSpc(tg.value, 1),
       links: clnSpc(lnk.value),
       type: $('#snav a.nav-cur')[0].innerHTML
@@ -140,8 +139,8 @@ cracc.onclick = () => {
   unomv = unom.value;
   pwv = pw.value;
   auth.createUserWithEmailAndPassword(unomv, pwv)
-    .catch(err => { rspAcc(err.message, 'e'); })
-    .then(function() { nuUserData(auth.currentUser.uid, unomv); });
+    .then(function() { nuUserData(auth.currentUser.uid, unomv); })
+    .catch(err => { rspAcc(err.message, 'e'); });
 };
 dolgt.onclick = () => {
   auth.signOut().then(function() {
@@ -311,8 +310,7 @@ hyphens (-) or spaces.`);
     updt['/'+x] = {
       priority: p.priority = jG('prisel').val(),
       title: p.title = jG('ti').val().trim(),
-      description: p.description = jG('des').val().trim()
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;'),
+      description: p.description = htmlRp(jG('des').val().trim()),
       tags: p.tags = clnSpc(jG('tg').val(), 1),
       links: p.links = clnSpc(jG('lnk').val()),
       type: $('#snav a.nav-cur')[0].innerHTML
