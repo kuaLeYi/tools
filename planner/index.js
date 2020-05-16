@@ -128,7 +128,7 @@ Save and exit edit mode</a><div><b id='savvup-wrn'></b></div><hr>
 function nuUserData(i, e) {
   db.ref('planner/'+i).set({
     email: e, posts: {}, wikients: {}, drkm: false
-  }).catch(err => { console.log('.set error\n'+err); });
+  }).catch(err => { rspAcc(err.message, 'e'); });
 }
 dolgn.onclick = () => {
   unomv = unom.value;
