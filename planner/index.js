@@ -146,6 +146,8 @@ cracc.onclick = () => {
 dolgt.onclick = () => {
   auth.signOut().then(function() {
     $('.main-sth-lis').empty();
+    bod.removeClass('darkmode');
+    $('#dmtgltarg').html('dark');
     $('#rsp-e').html('NIL');
     $('.acc-sth').hide();
     $('#acc-enter').show();
