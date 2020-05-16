@@ -12,7 +12,7 @@ var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   htmlRp = x => x.replace(/&/g, '&amp;').replace(/</g, '&lt;'),
   iShowingOld = '', iShowing = '',
   userId, poast = [], weeki = [], darkM,
-  root = e => 'planner/'+userId+(e?(e>1?'/wikients':'/posts'):''),
+  root = e => 'organiser/'+userId+(e?(e>1?'/wikients':'/posts'):''),
   partTyp = 'ins com adv ans his pre'.split` `,
   fullPri = 'Very low,Low,Medium,High,Very high'.split`,`,
   partPri = 'vl l m h vh'.split` `,
@@ -125,7 +125,7 @@ Save and exit edit mode</a><div><b id='savvup-wrn'></b></div><hr>
     .replace(/"(des|tg|lnk)"/g, (a, b) => `"${g}${b}"`)
 }</div>`);
 function nuUserData(i, e) {
-  db.ref('planner/'+i).set({
+  db.ref('organiser/'+i).set({
     email: e, posts: {}, wikients: {}, drkm: false
   }).catch(err => { rspAcc(err.message, 'e'); });
 }
