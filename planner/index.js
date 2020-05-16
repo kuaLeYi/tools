@@ -140,8 +140,8 @@ cracc.onclick = () => {
   unomv = unom.value;
   pwv = pw.value;
   auth.createUserWithEmailAndPassword(unomv, pwv)
-    .then(function() { nuUserData(auth.currentUser.uid, unomv); })
-    .catch(err => { rspAcc(err.message, 'e'); });
+    .catch(err => { rspAcc(err.message, 'e'); })
+    .then(function() { nuUserData(auth.currentUser.uid, unomv); });
 };
 dolgt.onclick = () => {
   auth.signOut().then(function() {
