@@ -21,3 +21,4 @@ body.darkmode #snav,body.darkmode button{background-color:#181818 !important}
 body.darkmode input,body.darkmode select,body.darkmode textarea{background-color:#000;color:#fff}
 body.darkmode button,body.darkmode #snav a{color:#fff}
 body.darkmode #snav a:active{color:#ccf}
+body.darkmode #main-hom code{background-color:#333;border-color:#666}
