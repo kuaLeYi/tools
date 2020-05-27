@@ -5,6 +5,12 @@ firebase.initializeApp({
   databaseURL: 'https://frustratiles.firebaseio.com',
   storageBucket: 'nam5.appspot.com'
 });
+/* Loose doc:
+  lgnBool is whether logged in
+  iShowing and iShowingOld hold last chars of pp now and prev
+  poast and weeki shall be lists of objects
+  getPrioriStr &c process data for disp in non-input/textarea eles
+  clnSpc works on the properties tags and links of a post */
 var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   rspAcc = (x, wic) => { $('#rsp-'+wic).html(x); },
   lgnBool = false,
@@ -23,24 +29,29 @@ var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   getLkStr = o => o.links.split` `.map(e =>
       `<a class='lkinpvu${hjs}${e}</a>`
     ).join`, `,
-  parseDescription = x => htmlRp(x.split`\n\n`.map(e => `<p>${e}</p>`)
+  parseDescription = x => htmlRp(x).split`\n\n`.map(e => `<p>${e}</p>`)
     .join``.replace(/\*\*(.+?)\*\*/g, (a, b) => `<b>${b}</b>`)
     .replace(/\/\/(.+?)\/\//g, (a, b) => `<i>${b}</i>`)
     .replace(/\^\^(.+?)\^\^/g, (a, b) => `<sup>${b}</sup>`)
     .replace(/,,(.+?),,/g, (a, b) => `<sub>${b}</sub>`)
-    .replace(/\n/g, e => '<br>')),
+    .replace(/\n/g, e => '<br>'),
   clnSpc = (x, y) => {
     x = x.trim().replace(/_{2,}/g, '_').replace(/\n/g, ' ').split` `;
     if (y) x = x.map(e => e.replace(/^_|_$|\\n/g, ''));
     return x.filter((e, i, a) => e && i === a.indexOf(e)).join` `;
   },
   g = 'editexstg-';
-function flipTo(i) {
+function flipTo(i) { // Disp given 'page' only, update ids prev & now
   $('#main > div').hide();
   $('#main-'+i).show();
   iShowingOld = iShowing;
   iShowing = i;
 }
+/* Loose doc:
+  Only needs to happen once
+  All links in side navbar point to relevant 'page'
+  Such links will be bolded iff their 'page' is chosen
+  BUT can't change 'page' if currently new-posting */
 $('#snav a').each(function() {
   $(this).on('click', function() {
     if (iShowing == 'pnu') {
@@ -53,11 +64,15 @@ save your post before leaving. Otherwise, cancel.`);
     flipTo(this.id);
   });
 });
-acc.click();
-function clearFields(x) {
+acc.click(); // Go to Account 'page' by clicking its btn
+function clearFields(x) { // For new-posting and post viewing
   x.find('input,textarea').val('');
   x.find('select').val('vl');
 }
+/* Loose doc:
+  Only needs to happen once
+  Set up lstnrs for instant cancellation of post creation OR viewing,
+  clearing div to hold any warnings */
 $('.cnl').each(function() {
   $(this).on('click', function() {
     $('.wrn').empty();
@@ -65,7 +80,12 @@ $('.cnl').each(function() {
     clearFields($(this).parent());
   });
 });
+// Toggle mkup help. Class-wide applicability -> toggles at both nup & pvu
 $('.des-cmnt-sh').on('click', function() { $('.des-cmnt-blk').toggle(); });
+/* Loose doc:
+  Affects 'New Post' btns on six side-navbar-linked pages: ins, com &c
+  Only needs to happen once
+  Can make a new post, which means open new-post page, iff logged in */
 $('.nup').each(function() {
   $(this).on('click', function() {
     if (lgnBool) {
@@ -75,6 +95,11 @@ $('.nup').each(function() {
     }
   });
 });
+/* Loose doc:
+  Simply add lstnr to btn savnup
+  Reject saving of new post & disps complaints, or
+  clean field values & save in db then
+  exit new-post page & empty it for future convenience */
 savnup.onclick = () => {
   var adrv = adr.value, snWr = $('#savnup-warn'), snWrComplaints = [];
   snWr.empty();
@@ -105,6 +130,7 @@ other than small letters (a–z), digits (0–9) or hyphens (-).`);
     clearFields($('#main-pnu'));
   }
 };
+// Fill up post-viewing 'page'; take adv of similarity to nup
 $('#main-pvu').html(`Viewing post at address <span id='pvuadr'></span> |
 <a class='delet${hjs}Instant delete</a> | \
 <a class='edmd' id='pvuenem${hjs}Enter edit mode</a>\
@@ -124,11 +150,13 @@ Save and exit edit mode</a><div><b id='savvup-wrn'></b></div><hr>
     .replace(/des-/g, g+'des-')
     .replace(/"(des|tg|lnk)"/g, (a, b) => `"${g}${b}"`)
 }</div>`);
+// To db add a new user w given email & some default values
 function nuUserData(i, e) {
   db.ref('organiser/'+i).set({
     email: e, posts: {}, wikients: {}, drkm: false
   }).catch(err => { rspAcc(err.message, 'e'); });
 }
+// Low-fuss login or account creation
 dolgn.onclick = () => {
   unomv = unom.value;
   pwv = pw.value;
@@ -142,6 +170,9 @@ cracc.onclick = () => {
     .then(function() { nuUserData(auth.currentUser.uid, unomv); })
     .catch(err => { rspAcc(err.message, 'e'); });
 };
+/* Loose doc:
+  Simple signout ending by setting things to how would be
+  before ever having logged in */
 dolgt.onclick = () => {
   auth.signOut().then(function() {
     $('.main-sth-lis').empty();
@@ -159,6 +190,13 @@ dmtgl.onclick = () => {
   db.ref(root()).update(updt);
   $('#dmtgltarg').text(darkM ? 'light' : 'dark');
 };
+/* Loose doc:
+  Listen for change in authen'n state and
+  if login, grab user's ID in order to show posts, prep
+  wiki, have dark or light mode as preferred;
+  if logout show login fields &c instead of welcome.
+  Might b gd to merge change-state-to-logged-out actions
+  into dolgt.onclick */
 auth.onAuthStateChanged(u => {
   lgnBool = !!u;
   $('#scbtn,#wscbtn').attr('disabled', !u);
@@ -190,13 +228,17 @@ auth.onAuthStateChanged(u => {
 function lisAppend(x, y, z) {
   $(`#main-${x}-lis`).append(processPost(y, z));
 }
-function processPost(p, a) {
+function processPost(p, a) { // Not full post, but summary
   return `<div><hr>\
 Priority: ${getPrioriStr(p)}<br>\
 Title: <a class='ti' id='${a}${hjs}${
   p.title ? p.title : 'NONE' }</a><br>\
 Tags: <span class='gat'>${getTagStr(p)}</span></div>`;
 }
+/* Loose doc:
+  Search posts. Currently simple
+  Deal w wildcard terms or wildcard-less terms, only ye latter
+  breaking down into - and +. HIDE posts yt do NOT match ye terms. */
 scbtn.onclick = () => {
   var navcurId = $('.nav-cur')[0].id;
   if (!partTyp.includes(navcurId)) return;
@@ -221,6 +263,10 @@ scbtn.onclick = () => {
     if (!mac) $(this).parent().hide();
   });
 }
+/* Loose doc:
+  Show post summaries based on address.
+  Connect their tags to the wiki.
+  Make each post able to be visited and looked at in full. */
 function listPoast() {
   $('.main-sth-lis').empty();
   for (var i in poast) {
@@ -252,6 +298,9 @@ function listPoast() {
   wikCnxtTags();
 }
 function vuPost(x) {
+  /* If post doesn't exist, stop. Else make sure the correct link
+    on the side navbar is bolded.
+  */
   var p, hvXCec = false, twoHidChg = n => {
     var s = 'em,#pvucntnt', arr = [`#pvuen${s}a`, `#pvusaex${s}b`];
     $(arr[n]).addClass('hid');
@@ -268,17 +317,18 @@ function vuPost(x) {
     }
   }
   if (!hvXCec) return;
-  var dfV = () => {
+  var dfV = () => { // Populate eles w post data, not editing
     jU('adr').html(x);
     jU('pri').html(getPrioriStr(p));
     jU('ti').html(p.title ? p.title : 'NONE');
     jU('des')
       .html(p.description ? parseDescription(p.description) : 'NONE');
     jU('tg').html(getTagStr(p));
-    wikCnxtTags();
+    wikCnxtTags(); // Activate the tags on this post-viewing page
     jU('lnk').html(getLkStr(p));
   };
   dfV();
+  // Activate links in pvu
   $('.lkinpvu').each(function() {
     this.onclick = () => { vuPost($(this).html()); };
   });
@@ -287,7 +337,7 @@ function vuPost(x) {
     db.ref(root(1)+'/'+x).remove();
     flipTo($('.nav-cur')[0].id);
   });
-  pvuenem.onclick = () => {
+  pvuenem.onclick = () => { // Populate fields w post data. Editing
     twoHidChg(0);
     $(`.${g}des-cmnt-sh`).on('click', function() {
       $(`.${g}des-cmnt-blk`).toggle();
@@ -298,6 +348,7 @@ function vuPost(x) {
     jG('tg').val(p.tags);
     jG('lnk').val(p.links);
   };
+  // Db-save, exit edit mode, switch to view-with-option-to-edit
   pvusaexem.onclick = () => {
     if (jG('lnk').val().match(/[^a-z0-9- ]/)) {
       $('#savvup-wrn').html(`The contents of the Links field may not \
@@ -319,6 +370,11 @@ hyphens (-) or spaces.`);
     twoHidChg(1);
   };
 }
+/* Loose doc:
+  Always in edit mode. Can db-save instantly. Deletion is instant.
+  Can try to go to the previous 'page'.
+  Notify if trouble going back, or trying to delete nothingness.
+*/
 function makeWikiPage(x) {
   $('#wikph').html(x);
   $('#wikpprob,#wikpbac-alert').empty();
@@ -348,6 +404,9 @@ function wikCnxtTags() {
     });
   });
 }
+/* Loose doc:
+  Search the wiki of post tags. Currently simple
+  On ye dedicated result page, show ye matching tag wiki-entries */
 wscbtn.onclick = () => {
   var wscvBasic = $('input[name=wsc]').val().trim(),
     wscvFull = wscvBasic.replace(/\\n/g, '\n').replace(/_{2,}/g, '_')
