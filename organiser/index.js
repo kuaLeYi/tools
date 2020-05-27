@@ -23,12 +23,12 @@ var db = firebase.database(), auth = firebase.auth(), unomv, pwv,
   getLkStr = o => o.links.split` `.map(e =>
       `<a class='lkinpvu${hjs}${e}</a>`
     ).join`, `,
-  parseDescription = x => x.split`\n\n`.map(e => `<p>${e}</p>`).join``
-    .replace(/\*\*(.+?)\*\*/g, (a, b) => `<b>${b}</b>`)
+  parseDescription = x => htmlRp(x.split`\n\n`.map(e => `<p>${e}</p>`)
+    .join``.replace(/\*\*(.+?)\*\*/g, (a, b) => `<b>${b}</b>`)
     .replace(/\/\/(.+?)\/\//g, (a, b) => `<i>${b}</i>`)
     .replace(/\^\^(.+?)\^\^/g, (a, b) => `<sup>${b}</sup>`)
     .replace(/,,(.+?),,/g, (a, b) => `<sub>${b}</sub>`)
-    .replace(/\n/g, e => '<br>'),
+    .replace(/\n/g, e => '<br>')),
   clnSpc = (x, y) => {
     x = x.trim().replace(/_{2,}/g, '_').replace(/\n/g, ' ').split` `;
     if (y) x = x.map(e => e.replace(/^_|_$|\\n/g, ''));
@@ -55,8 +55,8 @@ save your post before leaving. Otherwise, cancel.`);
 });
 acc.click();
 function clearFields(x) {
-  x.children('input,textarea').val('');
-  x.children('select').val('vl');
+  x.find('input,textarea').val('');
+  x.find('select').val('vl');
 }
 $('.cnl').each(function() {
   $(this).on('click', function() {
@@ -95,7 +95,7 @@ other than small letters (a–z), digits (0–9) or hyphens (-).`);
     updt['/'+adrv] = {
       priority: prisel.value,
       title: ti.value.trim(),
-      description: htmlRp(des.value.trim()),
+      description: des.value.trim(),
       tags: clnSpc(tg.value, 1),
       links: clnSpc(lnk.value),
       type: $('#snav a.nav-cur')[0].innerHTML
@@ -309,7 +309,7 @@ hyphens (-) or spaces.`);
     updt['/'+x] = {
       priority: p.priority = jG('prisel').val(),
       title: p.title = jG('ti').val().trim(),
-      description: p.description = htmlRp(jG('des').val().trim()),
+      description: p.description = jG('des').val().trim(),
       tags: p.tags = clnSpc(jG('tg').val(), 1),
       links: p.links = clnSpc(jG('lnk').val()),
       type: $('#snav a.nav-cur')[0].innerHTML
