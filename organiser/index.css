@@ -1,90 +1,23 @@
-#snav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  background-color: #f1f1f1;
-}
-#snav a, #snav input, #snav button {
-  margin-left: 8px;
-  font-family: consolas;
-}
-#snav a {
-  padding: 4px 8px 0 0;
-  text-decoration: none;
-  color: #000;
-  display: block;
-  cursor: pointer;
-}
-#snav a:hover {
-  color: #333;
-}
-#snav a:active {
-  color: #900;
-}
-#snav a.nav-cur {
-  font-weight: bold;
-}
-#snav a.nav-cur:before {
-  content: '>';
-}
-#snav button {
-  cursor: pointer;
-  border: 1px solid #888;
-  background: #fff;
-  max-width: 75%;
-}
-#snav button:active {
-  background-color: #fcc;
-}
-#snav input {
-  width: calc(100% - 20px);
-  border: 1px dashed #888;
-}
-#snav button, #snav input {
-  padding: 3px;
-}
-#main{
-  margin-left: 160px;
-  padding: 0 5px;
-}
-#main > div, .acc-sth, .hid {
-  display: none;
-}
-body, #main input, #main select, #main textarea {
-  font-family: verdana;
-}
-#main hr {
-  border: 1px dashed #888;
-}
-#main-hom code {
-  background-color: #eee;
-  border: 1px solid #888;
-  padding: 0.1em;
-}
-body.darkmode {
-  background-color: #000;
-  color: #fff;
-}
-body.darkmode a {
-  color: #e55;
-}
-body.darkmode a:active {
-  color: #66f;
-}
-body.darkmode #snav, body.darkmode button {
-  background-color: #181818 !important;
-}
-body.darkmode input, body.darkmode select, body.darkmode textarea {
-  background-color: #000;
-  color: #fff;
-}
-body.darkmode button, body.darkmode #snav a {
-  color: #fff;
-}
-body.darkmode #snav a:active {
-  color: #ccf;
-}
+#snav{height:100%;width:160px;position:fixed;z-index:1;top:0;left:0;overflow-x:hidden;background-color:#f1f1f1}
+#snav a,#snav input,#snav button{margin-left:8px;font-family:consolas}
+#snav a{padding:4px 8px 0 0;text-decoration:none;color:#000;display:block;cursor:pointer}
+#snav a:hover{color:#333}
+#snav a:active{color:#900}
+#snav a.nav-cur{font-weight:bold}
+#snav a.nav-cur:before{content:'>'}
+#snav button{cursor:pointer;border:1px solid #888;background:#fff;max-width:75%}
+#snav button:active{background-color:#fcc}
+#snav input{width:calc(100% - 20px);border:1px dashed #888}
+#snav button,#snav input{padding:3px}
+#main{margin-left:160px;padding:0 5px}
+#main > div,.acc-sth,.hid{display:none}
+body,#main input,#main select,#main textarea{font-family:verdana}
+#main hr{border:1px dashed #888}
+#main-hom code{background-color:#eee;border:1px solid #888;padding:0.1em}
+body.darkmode{background-color:#000;color:#fff}
+body.darkmode a{color:#e55}
+body.darkmode a:active{color:#66f}
+body.darkmode #snav,body.darkmode button{background-color:#181818 !important}
+body.darkmode input,body.darkmode select,body.darkmode textarea{background-color:#000;color:#fff}
+body.darkmode button,body.darkmode #snav a{color:#fff}
+body.darkmode #snav a:active{color:#ccf}
