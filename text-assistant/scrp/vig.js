@@ -1,4 +1,7 @@
-// Thanks to http://qaz.wtf/u/convert.cgi and https://fancytextguru.com
+/* Thanks to:
+  http://qaz.wtf/u/convert.cgi
+  https://fancytextguru.com
+  https://www.nayuki.io/page/vigenere-cipher-javascript */
 var vigS = (x, y) => x.split(y ? '' : ' '),
 vigSL = 'abcdefghijklmnopqrstuvwxyz',
 vigBigArr = vigS(vigSL.toUpperCase(), 1).concat(
@@ -74,7 +77,7 @@ vigfilt = x => {
   }
 }, vigcrp = decBool => {
   vigKeyI = 0;
-  vigStr = vigtext.value;
+  vigStr = outp.value;
   vigKey = vigfilt(vigk.value);
   if (!vigKey) {
     vigwrn.innerHTML = 'Key must contain at least one letter';
@@ -82,7 +85,7 @@ vigfilt = x => {
   } else vigwrn.innerHTML = '';
   if (decBool)
     vigKey = vigKey.split``.map(e => vigSL[(26-vigOrdLoCh(e))%26]);
-  vigtext.value = vigStr.replace(/[\ud800-\udfff]{2}|[^\ud800-\udfff]/g,
+  outp.value = vigStr.replace(/[\ud800-\udfff]{2}|[^\ud800-\udfff]/g,
     e => {
       var idx = vigBigArr.indexOf(e);
       if (~idx) {
@@ -93,6 +96,7 @@ vigfilt = x => {
       } else return e;
     }
   );
+  fcs();
 };
 vigenc.onclick = () => { vigcrp(); };
 vigdec.onclick = () => { vigcrp(1); };
