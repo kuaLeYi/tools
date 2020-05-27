@@ -48,7 +48,7 @@ function flipTo(i) { // Disp given 'page' only, update ids prev & now
   iShowing = i;
 }
 /* Loose doc:
-  Only needs to happen once
+  Need only happen once
   All links in side navbar point to relevant 'page'
   Such links will be bolded iff their 'page' is chosen
   BUT can't change 'page' if currently new-posting */
@@ -70,7 +70,7 @@ function clearFields(x) { // For new-posting and post viewing
   x.find('select').val('vl');
 }
 /* Loose doc:
-  Only needs to happen once
+  Need only happen once
   Set up lstnrs for instant cancellation of post creation OR viewing,
   clearing div to hold any warnings */
 $('.cnl').each(function() {
@@ -84,7 +84,7 @@ $('.cnl').each(function() {
 $('.des-cmnt-sh').on('click', function() { $('.des-cmnt-blk').toggle(); });
 /* Loose doc:
   Affects 'New Post' btns on six side-navbar-linked pages: ins, com &c
-  Only needs to happen once
+  Need only happen once
   Can make a new post, which means open new-post page, iff logged in */
 $('.nup').each(function() {
   $(this).on('click', function() {
@@ -299,8 +299,7 @@ function listPoast() {
 }
 function vuPost(x) {
   /* If post doesn't exist, stop. Else make sure the correct link
-    on the side navbar is bolded.
-  */
+    on the side navbar is bolded. */
   var p, hvXCec = false, twoHidChg = n => {
     var s = 'em,#pvucntnt', arr = [`#pvuen${s}a`, `#pvusaex${s}b`];
     $(arr[n]).addClass('hid');
@@ -373,8 +372,7 @@ hyphens (-) or spaces.`);
 /* Loose doc:
   Always in edit mode. Can db-save instantly. Deletion is instant.
   Can try to go to the previous 'page'.
-  Notify if trouble going back, or trying to delete nothingness.
-*/
+  Notify if trouble going back, or trying to del nothingness. */
 function makeWikiPage(x) {
   $('#wikph').html(x);
   $('#wikpprob,#wikpbac-alert').empty();
