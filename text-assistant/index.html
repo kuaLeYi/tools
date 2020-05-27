@@ -35,6 +35,7 @@
     <li><button class='btn' onclick=navigateBttm(bttmsortxtlin)>Sort lines</button></li>
     <li><button class='btn' onclick=navigateBttm(bttmstopwatch)>Stopwatch</button></li>
     <li><button class='btn' onclick=navigateBttm(bttmtxtcou)>Text counter</button></li>
+    <li><button class='btn' onclick=navigateBttm(bttmvig)>Vigenère cipher</button></li>
   </ul></div>
   <div class='col colright'><div id='wrapper'><a></a><textarea id='outp'></textarea></div></div>
 </div>
@@ -132,6 +133,12 @@ Remove: <label><input type='radio' name='rmvspchow' value=0 checked>extra</label
 </div>
 <div id='bttmtxtcoufreq'><span class='btn' onclick=navigateBttm(bttmtxtcou)>Back</span> <input class='gdinp gdinp30p' id='txtcoufreqsrch'> <span class='btn' onclick=findInWordFreq()>Find</span>
 <div class='colcou3'><ul id='txtcoufreq'></ul></div></div>
+<div id='bttmvig'><table>
+<tr><td><label for='vigtext'>Text:</label></td><td><textarea name='vigtext' class='nicerarea' id='vigtext'></textarea></td></tr>
+<tr><td><label for='vigk'>Key:</label></td><td><textarea name='vigk' class='nicerarea' id='vigk'></textarea></td></tr>
+<tr><td></td><td><button class='btn' id='vigenc'>Encrypt</button> <button class='btn' id='vigdec'>Decrypt</button></td></tr>
+</table>
+<div id='vigwrn'></div></div>
 </div>
 <script src='scrp/system.js'></script>
 <script src='scrp/presufaddrmv.js'></script>
@@ -146,4 +153,5 @@ Remove: <label><input type='radio' name='rmvspchow' value=0 checked>extra</label
 <script src='scrp/ctning.js'></script>
 <script src='scrp/sortxtlin.js'></script>
 <script src='scrp/stopwatch.js'></script>
-<script src='scrp/txtcou.js'></script></body></html>
+<script src='scrp/txtcou.js'></script>
+<script src='scrp/vig.js'></script></body></html>
