@@ -82,7 +82,7 @@ vigfilt = x => {
   if (!vigKey) {
     vigwrn.innerHTML = 'Key must contain at least one letter';
     return;
-  } else vigwrn.innerHTML = '';
+  } else vigwrn.innerHTML = 'NIL';
   if (decBool)
     vigKey = vigKey.split``.map(e => vigSL[(26-vigOrdLoCh(e))%26]);
   outp.value = vigStr.replace(/[\ud800-\udfff]{2}|[^\ud800-\udfff]/g,
