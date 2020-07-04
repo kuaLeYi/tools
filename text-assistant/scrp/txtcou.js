@@ -7,7 +7,8 @@ function getTxtUpToCurAndSelAndAll() {
 }
 outp.oninput = outp.onclick = outp.onselectionchange = txtcounospc.onclick = txtcounobrk.onclick = txtcousplck.onclick = () => {
   var x, y, couW = (z, Z) => {
-    z = z.match(new RegExp(`[\\w${addnlwch.value.replace(/\s/g, '')}]+`, 'g'));
+    let a = `\\w${addnlwch.value.replace(/\s/g, '')}]`;
+    z = z.match(new RegExp(`[${a}['‘’${a}+[${a}|[${a}+`, 'g'));
     if (Z) y = z;
     return z ? z.length : 0;
   }, couL = x => x ? x.split`\n`.length : 0, texts = getTxtUpToCurAndSelAndAll(), wCous = {};
