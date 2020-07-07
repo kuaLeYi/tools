@@ -1,13 +1,74 @@
-#a{width:400px}
-#c{font-size:85%;width:110px}
-#inp{resize:none}
-#master-t{margin:0 auto}
-.g{background-color:#eee}
-.i{margin:-10%;width:120%}
-.i>tbody>tr>td{padding:0;text-align:center;width:calc(100%/3)}
-body{font-family:sans-serif}
-h1{font-size:120%;margin-top:0}
-table.o,table.o>tbody>tr>td{border:1px solid #000;border-collapse:collapse}
-table.o>tbody>tr>td>b{font-size:250%}
-table.o>tbody>tr>td{font-size:80%;height:45px;text-align:center;width:45px}
-u{text-decoration-style:dotted}
+body {
+  font-family: sans-serif;
+  user-select: none;
+}
+p {
+  margin-bottom: .15em;
+  margin-top: .3em;
+}
+table {
+  border-collapse: collapse;
+  height: 21.6em;
+  width: 21.6em;
+}
+td {
+  background-color: #fff;
+  border: .1em solid #ccc;
+  height: 2.4em;
+  text-align: center;
+  width: 2.4em;
+}
+.gridtd div { position: relative; }
+.gridtd div div { position: absolute; }
+.gridtd div .nt {
+  color: #ddd;
+  font-size: 80%;
+  line-height: .9;
+  margin-left: .15em;
+  margin-top: -1.3em;
+}
+.gridtd div .nml {
+  font-size: 150%;
+  margin-top: -.6em;
+  width: 100%;
+}
+.lkd { font-weight: bold; }
+.sh { background-color: #eee; }
+.noted { color: #600; }
+#tlbar { margin-top: .5em; }
+.tlbarS {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20%;
+  cursor: pointer;
+  display: inline-block;
+  height: 1.4em;
+  padding: 0;
+  text-align: center;
+  width: 1.4em;
+}
+.tlbarS[disabled] { background-color: #ddd; }
+.tlbarS:focus { outline: none; }
+.tlbarS:hover { background-color: #ddd; }
+.tlbarS { font-size: 150%; }
+.lit {
+  background-color: #c00;
+  color: #fff;
+}
+.lit:hover { background-color: #a00; }
+.container { display: flex; }
+.fixed { width: 10em; margin-right: .3em; }
+.flexitem { flex-grow: 1; }
+.mag { color: #f0f; }
+.tipTog, .xstxt { font-size: 85%; }
+.stxt { font-size: 95%; }
+.sdbtn { margin: .1em 0; }
+#thicR {
+  border: .15em solid #c00;
+  height: 2.2em;
+  margin-left: -.2em;
+  margin-top: -1.25em;
+  position: absolute;
+  width: 2.2em;
+}
+.tips, .tipTogH { display: none; }

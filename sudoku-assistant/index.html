@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='index.css'>
-<link rel='icon' href='https://avatars0.githubusercontent.com/u/23028142'>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="icon" href="https://avatars0.githubusercontent.com/u/23028142">
 <title>SA</title>
 </head>
 <body>
-<table id='master-t'>
-<tr>
-<td><h1><a href='README.md'>9×9 Sudoku</a><br><a href='..'>Assistant</a></h1>
-<textarea id='inp' oninput=main(this.value) cols=9 rows=9></textarea><br><button id='b' title='Submit' onclick=display(board) disabled>Submit</button> <button title='Example' onclick=example()>Ex.</button>
-<p id='c'>Enter the <u title='An example is available.'>number placement</u> in nine rows of nine separated by a space or line break. <b>Use 0 for each blank.</b> Submitting will fill in sole valid digits and display <u title='Compare notes in a subgrid, across a row or down a column to narrow down possibilities.'>cell notes</u>. Edit and re-submit as desired.</p></td>
-<td><div id='a'><hr></div></td>
-</tr>
-</table>
-<script src='index.js'></script></body>
+<div class="container"><div class="fixed">
+<p class="stxt"><b>9×9 Sudoku Assistant (Revamped)</b></p>
+<p><button id="instaC">Instant clear</button><br>
+<button id="ntAsst">Cell notes (overwrite)</button></p>
+<a class="tipTog" href="javascript:">Show tips</a>
+<a class="tipTog tipTogH" href="javascript:">Hide tips</a>
+<p class="xstxt tips">Choose your position by
+clicking the desired cell, or using WASD or the arrow keys.</p>
+<p class="xstxt tips">Type a digit from 1 to 9,
+or click it on the toolbar below the grid, to
+insert it if in 'normal' mode or toggle it if in notes mode.</p>
+<p class="xstxt tips">In notes mode, you can click
+a digit in its cell to toggle it; in normal mode, push
+the Enter key to lock an inserted digit.</p>
+<p class="xstxt tips">Rule violations are shown live.</p>
+</div><div class="flexitem">
+<table id="grid"></table>
+<div id="tlbar"></div>
+</div></div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="index.js"></script></body>
 </html>
